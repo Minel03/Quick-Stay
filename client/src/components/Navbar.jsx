@@ -52,7 +52,7 @@ const Navbar = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <nav
@@ -62,7 +62,7 @@ const Navbar = () => {
         <img
           src={assets.logo}
           alt=''
-          className={`h-9 ${isScrolled && 'invert opacity-80'}`}
+          className={`h-9 ${isScrolled && 'invert opacity-80'} `}
         />
       </Link>
 
