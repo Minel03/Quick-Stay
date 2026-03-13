@@ -1,5 +1,4 @@
 import User from '../models/User.js';
-import userModel from '../models/User.js';
 import { Webhook } from 'svix';
 
 const clerkWebhooks = async (req, res) => {
@@ -39,7 +38,7 @@ const clerkWebhooks = async (req, res) => {
         break;
       }
 
-      case 'user.delete': {
+      case 'user.deleted': {
         await User.findByIdAndDelete(data.id);
         break;
       }
