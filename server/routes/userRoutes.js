@@ -3,7 +3,7 @@ import { protect } from '../middleware/authMiddleware.js';
 import {
   getUserData,
   storeRecentSearchedCities,
-} from '../controllers/UserController.js';
+} from '../controllers/userController.js';
 
 const userRouter = express.Router();
 
