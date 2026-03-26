@@ -1,13 +1,24 @@
+import { getAuth } from '@clerk/express';
 import User from '../models/User.js';
 
-// Middleware to check if user is authenticated
 export const protect = async (req, res, next) => {
-  const { userId } = req.auth;
-  if (!userId) {
-    res.json({ success: false, message: 'Not Authenticated' });
-  } else {
+  try {
+    const { userId } = getAuth(req); // ✅ Properly reads the Bearer token
+
+    if (!userId) {
+      return res.json({ success: false, message: 'Not Authenticated' });
+    }
+
     const user = await User.findById(userId);
+
+    if (!user) {
+      return res.json({ success: false, message: 'User not found' });
+    }
+
     req.user = user;
     next();
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
   }
 };
